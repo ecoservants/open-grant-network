@@ -131,7 +131,7 @@ This section will continue to expand as the Open Grant Network grows and more co
 
 Additional contributors whose work helped move the Open Grant Network forward include:
 
-Shwetha Mithun, Mehlika Atmaca, Jaya Saran Teja Pavuluri, Tousif Patel
+Anurag Bojja, Shwetha Mithun, Mehlika Atmaca, Jaya Saran Teja Pavuluri, Tousif Patel
 
 ---
 
