@@ -121,8 +121,17 @@ Apache 2.0
 
 ---
 
-# 📄 **Special Thanks for Your Endless Dedication and Special Contributions**
-Tileshwar Narayan, Sarah George, Shwetha Mithun, Mehlika Atmaca, Jaya Saran Teja Pavuluri, Tousif Patel
+## 📄 Special Thanks for Your Endless Dedication and Special Contributions
+
+This section will continue to expand as the Open Grant Network grows and more contributors help strengthen the project.
+
+**Tileshwar Narayan** — Maintainer and prominent contributor to the Open Grant Network. Tileshwar played a major role in shaping the technical foundation of OGN, including pipeline development, financial data processing, master organization universe work, data structuring and the broader architecture needed to prepare the project for public deployment.
+
+**Sarah George** — Maintainer and prominent contributor to the Open Grant Network. Sarah contributed significantly to the organization, refinement and development of OGN, helping strengthen the project’s structure, documentation, research workflows and long-term usability for EcoServants® grant research and nonprofit intelligence efforts.
+
+Additional contributors whose work helped move the Open Grant Network forward include:
+
+Shwetha Mithun, Mehlika Atmaca, Jaya Saran Teja Pavuluri, Tousif Patel
 
 ---
 
