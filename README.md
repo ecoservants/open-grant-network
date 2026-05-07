@@ -121,6 +121,11 @@ Apache 2.0
 
 ---
 
+# 📄 **Special Thanks for Your Endless Dedication and Special Contributions**
+Tileshwar Narayan, Sarah George, Mehlika Atmaca, Jaya Saran Teja Pavuluri, Tousif Patel
+
+---
+
 # 📬 **Contact**
 
 support@ecoservantsproject.org  
