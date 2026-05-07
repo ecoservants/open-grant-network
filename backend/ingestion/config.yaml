@@ -1,0 +1,18 @@
+full_ingest:
+  stop_on_error: true
+  datasets:
+    - irs_990
+    - bmf
+    - grants_gov
+
+incremental:
+  stop_on_error: false
+  datasets:
+    - irs_990
+    - bmf
+
+debug:
+  stop_on_error: true
+  datasets:
+    - irs_990
+    - grants_gov

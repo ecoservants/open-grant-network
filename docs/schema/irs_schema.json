@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IRS Normalized Schema",
+  "type": "object",
+  "properties": {
+    "ein": {
+      "type": "string",
+      "pattern": "^\\d{9}$",
+      "description": "9-digit EIN"
+    }
+  },
+  "required": ["ein"],
+  "additionalProperties": false
+}

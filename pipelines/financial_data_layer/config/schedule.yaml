@@ -1,0 +1,87 @@
+# Grant Tracker — Automation Schedule Configuration
+# Controls which pipelines run at each frequency
+
+schedules:
+
+  # ── Monthly ──────────────────────────────────────────────────────────────
+  # Pull updated EO BMF, new SOI data, refresh ProPublica enrichment
+  # Run on: 1st of every month
+  monthly:
+    stop_on_error: true
+    steps:
+      - bmf_discover        # Auto-detect latest IRS posting date
+      - bmf_download        # Download updated state CSV files
+      - bmf_load            # Parse and upsert into organizations_master
+      - soi_download        # Download latest SOI extract
+      - soi_load            # Load financials into organization_financials
+      - propublica_enrich   # Refresh filing history via ProPublica API
+      - propublica_search   # Search enrichment for foundation types
+      - fac_load            # Refresh federal funding flags
+      - integrity           # Run data integrity checks and normalization
+
+  # ── Quarterly ────────────────────────────────────────────────────────────
+  # Everything in monthly + recompute scores and requalify funders
+  # Run on: 1st of January, April, July, October
+  quarterly:
+    stop_on_error: true
+    steps:
+      - bmf_discover
+      - bmf_download
+      - bmf_load
+      - soi_download
+      - soi_load
+      - propublica_enrich
+      - propublica_search
+      - fac_load
+      - integrity
+      - keywords            # Refresh keyword and mission tags
+      - scores              # Recompute composite scores and tiers
+
+  # ── Annual ───────────────────────────────────────────────────────────────
+  # Full refresh including 990 XML index and 3-year average recalculation
+  # Run on: January 1st
+  annual:
+    stop_on_error: false    # Continue even if some steps fail
+    steps:
+      - bmf_discover
+      - bmf_download
+      - bmf_load
+      - soi_download
+      - soi_load
+      - xml990_index        # Download latest 990 XML index files
+      - propublica_enrich
+      - propublica_search
+      - fac_load
+      - integrity
+      - keywords
+      - scores
+
+  # ── Full (from scratch) ───────────────────────────────────────────────────
+  # Complete rebuild — use for initial setup or major resets
+  full:
+    stop_on_error: true
+    steps:
+      - bmf_discover
+      - bmf_download
+      - bmf_load
+      - soi_download
+      - soi_load
+      - xml990_index
+      - propublica_enrich
+      - propublica_search
+      - fac_load
+      - integrity
+      - keywords
+      - scores
+
+  # ── Scores only ───────────────────────────────────────────────────────────
+  # Lightweight — just recompute scores without fetching new data
+  scores_only:
+    stop_on_error: true
+    steps:
+      - scores
+
+# ── Cron schedule (for reference) ────────────────────────────────────────
+# Monthly  : 0 6 1 * *   python src/run_pipeline.py --mode monthly
+# Quarterly: 0 6 1 1,4,7,10 * python src/run_pipeline.py --mode quarterly
+# Annual   : 0 6 1 1 *   python src/run_pipeline.py --mode annual

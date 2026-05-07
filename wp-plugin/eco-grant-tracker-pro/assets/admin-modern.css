@@ -1,0 +1,620 @@
+/* ========================================================
+   EcoServants® Grant Tracker Pro – Modern Visual Theme
+   Enhanced Grid, Animations, and Hover Depth
+   Brand Color: #243b7e
+======================================================== */
+
+/* ===================== GRID LAYOUT ===================== */
+.esgt-grant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: esgtFadeContainer 0.5s ease-in;
+}
+
+@keyframes esgtFadeContainer {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================== CARD STYLE ===================== */
+.esgt-grant-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e4e7ef;
+  padding: 22px 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: esgtFadeIn 0.6s ease forwards;
+  animation-delay: calc(var(--card-index, 0) * 0.1s);
+}
+
+.esgt-grant-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(36, 59, 126, 0.18);
+  border-color: #243b7e;
+}
+
+@keyframes esgtFadeIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.esgt-grant-card h3 {
+  font-size: 1.2rem;
+  color: #243b7e;
+  margin-bottom: 6px;
+}
+
+.esgt-grant-card .esgt-desc {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.esgt-grant-card p {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 4px 0;
+}
+
+/* ===================== BUTTONS ===================== */
+.esgt-grant-card .esgt-btn {
+  display: block;
+  width: 100%;
+  background: #243b7e;
+  color: #fff;
+  padding: 10px 0;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.25s ease;
+}
+
+.esgt-grant-card .esgt-btn:hover {
+  background: #1b2e6b;
+  transform: translateY(-2px);
+}
+
+/* ===================== STATUS BADGES ===================== */
+.esgt-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: #243b7e;
+  text-transform: capitalize;
+}
+
+/* Status pill is a button in the grid */
+.esgt-status-pill{
+  border: 0;
+  cursor: pointer;
+  line-height: 1.2;
+}
+.esgt-status-pill:focus{
+  outline: 2px solid #243b7e;
+  outline-offset: 2px;
+}
+
+/* Status dropdown menu */
+.esgt-status-menu{
+  position: absolute;
+  z-index: 99999;
+  min-width: 180px;
+  background: #ffffff;
+  border: 1px solid #dfe3ea;
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+}
+.esgt-status-menu-item{
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.esgt-status-menu-item:hover{ background: #f4f6fb; }
+.esgt-status-menu-item.is-active{ background: #eef2ff; }
+
+.esgt-status[data-status*="Researching"] { background: #eef2ff; color: #3730a3; }
+.esgt-status[data-status*="Planned"] { background: #e0f2fe; color: #075985; }
+.esgt-status[data-status*="Progress"] { background: #fef9c3; color: #92400e; }
+.esgt-status[data-status*="Submitted"] { background: #dcfce7; color: #065f46; }
+.esgt-status[data-status*="Awarded"] { background: #d1fae5; color: #065f46; }
+.esgt-status[data-status*="Declined"],
+.esgt-status[data-status*="Abandoned"] { background: #fee2e2; color: #991b1b; }
+
+/* ===================== TOOLBAR ===================== */
+.esgt-toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.esgt-toolbar input[type="search"],
+.esgt-toolbar select {
+  padding: 8px 10px;
+  border: 1px solid #dfe3ea;
+  border-radius: 8px;
+  min-width: 200px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* EIN tools (ProPublica quick links) */
+.esgt-ein-tools{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+/* Filter form */
+.esgt-filter-form{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  width:100%;
+}
+
+.esgt-toolbar input[type="text"]{
+  padding: 8px 10px;
+  border: 1px solid #dfe3ea;
+  border-radius: 8px;
+  min-width: 200px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Advanced filters */
+.esgt-advanced-panel{
+  width:100%;
+  max-width: 1100px;
+  background: #fff;
+  border: 1px solid #e6ebf2;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.esgt-adv-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.esgt-adv-field label{
+  display:block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #243b7e;
+}
+
+.esgt-adv-row{
+  display:flex;
+  gap: 8px;
+  align-items:center;
+}
+
+.esgt-adv-row select{
+  min-width: 90px;
+}
+
+.esgt-adv-help{
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  color: #445067;
+}
+.esgt-ein-tools .esgt-ein{
+  padding: 8px 10px;
+  border: 1px solid #dfe3ea;
+  border-radius: 8px;
+  min-width: 180px;
+  font-size: 0.9rem;
+}
+.esgt-ein-tools .esgt-ein:focus{
+  border-color: #243b7e;
+  box-shadow: 0 0 0 3px rgba(36, 59, 126, 0.15);
+  outline:none;
+}
+
+.esgt-toolbar input[type="search"]:focus,
+.esgt-toolbar select:focus {
+  border-color: #243b7e;
+  box-shadow: 0 0 0 3px rgba(36, 59, 126, 0.15);
+  outline: none;
+}
+
+/* ===================== MODAL ===================== */
+.esgt-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 10000;
+}
+.esgt-modal.is-open { display: block; }
+.esgt-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+}
+.esgt-modal-dialog {
+  position: relative;
+  max-width: 960px;
+  margin: 6vh auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  border-top: 6px solid #243b7e;
+  overflow: hidden;
+}
+.esgt-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 26px;
+  background: transparent;
+  border: none;
+  color: #243b7e;
+  cursor: pointer;
+}
+.esgt-modal-close:hover { color: #1b2e6b; }
+
+.esgt-modal-content{
+  padding: 22px 26px 20px;
+}
+
+.esgt-suggest-header{
+  margin: 0 0 14px;
+}
+.esgt-suggest-title{
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0.2px;
+}
+.esgt-suggest-subtitle{
+  margin: 8px 0 0;
+  color: #4b5563;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ===== Suggest Grant Form ===== */
+.esgt-form{
+  margin-top: 14px;
+}
+.esgt-form-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+}
+.esgt-field{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.esgt-field-full{
+  margin-top: 14px;
+}
+.esgt-label{
+  font-size: 12px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.2px;
+}
+.esgt-required{
+  color: #b91c1c;
+}
+.esgt-input,
+.esgt-textarea{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  color: #111827;
+  font-size: 14px;
+  line-height: 1.35;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.esgt-textarea{
+  resize: vertical;
+  min-height: 120px;
+}
+.esgt-input:focus,
+.esgt-textarea:focus{
+  border-color: #243b7e;
+  box-shadow: 0 0 0 3px rgba(36,59,126,0.18);
+}
+.esgt-help{
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.esgt-actions{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #eef2ff;
+}
+
+/* Button variants within modal */
+.esgt-modal .esgt-btn{
+  display: inline-flex;
+  width: auto;
+  padding: 10px 14px;
+  margin-top: 0;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.esgt-btn-primary{
+  background: #243b7e;
+  color: #fff;
+}
+.esgt-btn-primary:hover{
+  background: #1b2e6b;
+}
+.esgt-btn-secondary{
+  background: #ffffff;
+  color: #243b7e;
+  border-color: #c7d2fe;
+}
+.esgt-btn-secondary:hover{
+  background: #eef2ff;
+}
+
+/* Modal responsiveness */
+@media (max-width: 760px){
+  .esgt-modal-dialog{
+    margin: 4vh 12px;
+  }
+  .esgt-modal-content{
+    padding: 18px 16px 16px;
+  }
+  .esgt-form-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 760px) {
+  .esgt-grant-grid { grid-template-columns: 1fr; padding: 10px; }
+  .esgt-toolbar { flex-direction: column; }
+  .esgt-grant-card { padding: 18px; }
+}
+
+/* ==========================
+   EcoServants Grant Academy UI
+========================== */
+
+.esa-gt-hero {
+  border-radius: 18px;
+  padding: 22px;
+  margin: 0 0 18px;
+  background: linear-gradient(180deg, rgba(36,59,126,0.10), rgba(36,59,126,0.02));
+  border: 1px solid rgba(36,59,126,0.14);
+}
+
+.esa-gt-hero__inner {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.esa-gt-kicker {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+
+.esa-gt-title {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.esa-gt-subtitle {
+  margin-top: 8px;
+  opacity: 0.85;
+  max-width: 60ch;
+}
+
+.esa-gt-stats {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.esa-gt-stat {
+  border-radius: 14px;
+  padding: 12px 12px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.esa-gt-stat__label {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.esa-gt-stat__value {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.esa-gt-usercard {
+  min-width: 220px;
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.esa-gt-usercard__name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.esa-gt-usercard__meta {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.esa-gt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.esa-gt-btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(36,59,126,0.25);
+  color: #243b7e;
+}
+
+.esa-gt-btn--ghost:hover {
+  border-color: rgba(36,59,126,0.45);
+}
+
+@media (max-width: 720px) {
+  .esa-gt-title { font-size: 26px; }
+  .esa-gt-stats { grid-template-columns: 1fr; }
+  .esa-gt-usercard { width: 100%; }
+}
+
+
+/* Locked screen (Grant Academy gate) */
+.esa-gt-locked{
+  max-width:520px;
+  margin:80px auto;
+  padding:28px;
+  border-radius:18px;
+  text-align:center;
+  background: rgba(36,59,126,0.06);
+  border: 1px solid rgba(36,59,126,0.18);
+}
+.esa-gt-locked h2{ margin-top:0; }
+.esa-gt-locked .button{ margin-top:12px; }
+
+
+/* ===================== ACTIVE FILTER CHIPS ===================== */
+.esgt-active-filters{
+  width:100%;
+  max-width:1100px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  margin: 8px 0 0;
+}
+.esgt-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 6px 10px;
+  border: 1px solid #dfe3ea;
+  background: #f7f9ff;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color:#1f2a44;
+}
+.esgt-chip-text{
+  line-height: 1.2;
+}
+.esgt-chip-x{
+  border:0;
+  background: transparent;
+  cursor:pointer;
+  font-size: 16px;
+  line-height: 1;
+  color:#243b7e;
+  padding: 0 2px;
+}
+.esgt-chip-x:hover{
+  opacity: 0.85;
+}
+
+/* ===================== SEGMENTED ANY/ALL TOGGLE ===================== */
+.esgt-seg{
+  display:inline-flex;
+  border: 1px solid #dfe3ea;
+  border-radius: 10px;
+  overflow:hidden;
+  background:#fff;
+}
+.esgt-seg-btn{
+  border:0;
+  background: transparent;
+  padding: 8px 10px;
+  cursor:pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color:#243b7e;
+}
+.esgt-seg-btn.is-active{
+  background:#243b7e;
+  color:#fff;
+}
+.esgt-seg-select{
+  display:none !important;
+}
+
+/* ===================== ADVANCED MICRO HELP ===================== */
+.esgt-adv-micro{
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color:#445067;
+}
+.esgt-scope-badge{
+  display:inline-block;
+  margin-left: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color:#243b7e;
+  background:#eef2ff;
+  border:1px solid #dfe3ea;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
