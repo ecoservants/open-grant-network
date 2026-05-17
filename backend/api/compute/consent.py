@@ -41,17 +41,20 @@ def record_consent():
         logger.warning(f"[CONSENT] Security alert: Malformed hash received: {consent_hash}")
         return jsonify({"error": "Invalid consent_hash format"}), 400
 
-    db = phase2_db.get_db_connection()
-    cur = db.cursor()
-
+    db = None
+    cur = None
+    
     try:
+        db = phase2_db.get_db_connection()
+        cur = db.cursor()
+
         # 4. Verify Node Token in DB
         cur.execute("SELECT id, node_public_id FROM community_nodes WHERE api_token = %s", (api_token,))
         node = cur.fetchone()
 
         if not node:
             # Addressing "Consider separating 401 vs 403" feedback
-            logger.warning(f"[CONSENT] Forbidden: Invalid token {api_token[:5]}...")
+            logger.warning("[CONSENT] Forbidden: Invalid API token attempt")
             return jsonify({"error": "Forbidden: Invalid or expired token"}), 403
 
         node_id = node[0]
@@ -82,9 +85,12 @@ def record_consent():
         db.rollback()
         logger.error(f"[CONSENT] Critical Error: {str(e)}")
         return jsonify({"error": "Internal server error"}), 500
+    
     finally:
-        cur.close()
-        db.close()
+        if cur:
+            cur.close()
+        if db:
+            db.close()
 
 if __name__ == '__main__':
     app.run(port=5002)

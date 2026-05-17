@@ -12,10 +12,13 @@ def fetch_job():
     if not api_token:
         return jsonify({"error": "Unauthorized: API token missing"}), 401
 
-    db = phase2_db.get_db_connection()
-    cur = db.cursor()
-
+    db = None
+    cur = None
+    
     try:
+        db = phase2_db.get_db_connection()
+        cur = db.cursor()
+    
         # 2. Node Eligibility Checks (Active + Consent)
         cur.execute("""
             SELECT id, is_active, consent_provided 
@@ -48,8 +51,9 @@ def fetch_job():
         cur.execute("""
             SELECT id, job_type, payload 
             FROM community_jobs 
-            WHERE status = 'pending' 
-            LIMIT 1 
+            WHERE status = 'pending'
+            ORDER BY created_at ASC
+            LIMIT 1
             FOR UPDATE SKIP LOCKED
         """)
         job = cur.fetchone()
@@ -85,8 +89,12 @@ def fetch_job():
         logger.error(f"[JOB-FETCH] System Error: {str(e)}")
         return jsonify({"error": "Internal Server Error"}), 500
     finally:
-        cur.close()
-        db.close()
+        if cur:
+            cur.close()
+        if db:
+            db.close()
+
+        
 
 if __name__ == '__main__':
     app.run(port=5001)
